@@ -1,6 +1,9 @@
 <?php
 
-class AbstractDBModel implements IDBModel {
+/**
+ * An abstract representation of a model storable into a database.
+ */
+abstract class AbstractDBModel implements IDBModel {
 	
 	/**
 	 * Query builder.
@@ -14,7 +17,7 @@ class AbstractDBModel implements IDBModel {
 	
 	public function save() {
 		if($this->validate() === false) {
-			throw new InvalidParametersExpcetion('Properties of the model are not valid. Cannot store');
+			throw new InvalidParametersException('Properties of the model are not valid. Cannot store');
 		}
 		
 		//Check whether performing an update or an insert
