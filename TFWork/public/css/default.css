@@ -1,0 +1,16 @@
+/* 
+    Document   : default
+    Created on : 08-Jul-2013, 19:34:13
+    Author     : user
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+body {
+    margin: 0 auto;
+}
+

@@ -1,0 +1,2 @@
+This is a dummy file to ensure the creation of the img folder.
+Huzzah, for it has succeeded.
