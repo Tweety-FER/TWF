@@ -1,0 +1,3 @@
+This is a dummy file which ensures the directory gets created.
+Put your controller implementations here, naming them [Name]Controller.
+All callable actions must be named action_[name]

@@ -72,17 +72,6 @@ abstract class AbstractDBModel implements IDBModel {
 		return $this->fpdo->from($this->getTable());
 	}
 	
-	public function validate() {
-		$validator = new ObjectValidator();
-		$validator->addRules($this->getValidationRules());
-		$result = $validator->validate($this);
-		if($result === false) {
-			$this->validationErrors = $validator->getValidationErrors();
-		}
-		
-		return $result;
-	}
-	
 	public function equals(IModel $model) {
 		if(get_class($this) !== get_class($model)) {
 			return false;

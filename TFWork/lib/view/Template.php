@@ -2,14 +2,35 @@
 
 class Template {
     
+    /**
+     * The name of the controller which constructs the template.
+     * @var string
+     */
     private $controller;
     
+    /**
+     * The action called by the controller.
+     * @var string
+     */
     private $action;
     
+    /**
+     * Css file or files to link to
+     * @var string|string[]
+     */
     private $css;
     
+    /**
+     * Javascript file or files to link to
+     * @var string|string[]
+     */
     private $js;
     
+    /**
+     * Array of mixed-type key-value pairs used by the template to represent<br/>
+     * its public variables.
+     * @var array
+     */
     private $arguments = array();
     
     public function __construct($controller, $action, $css = DEFAULT_CSS, $js = '') {
@@ -34,30 +55,43 @@ class Template {
     }
     
     public function display() {
-        ?><html><?php
+        ?>
+        <!DOCTYPE html>
+        <html>
+        <?php
         $this->displayHead();
-        ?><body><?php
+        ?>
+            <body>
+        <?php
         $this->getElement('header', DEF_HEADER);
         
-        $path = TEMPLATE_ROOT . $this->controller . DS . $this->action . TEMPLATE_EXTENSION;
+        $path = TEMPLATE_ROOT . strtolower($this->controller) . DS . 
+                strtolower($this->action) . TEMPLATE_EXTENSION;
+        
         if(is_readable($path)) {
-            echo include($path);
+            
+            include($path);
         } else {
-            echo include(NOT_FOUND);
+            include(NOT_FOUND);
         }
         
         $this->getElement('footer', DEF_FOOTER);
         ?>
-        </body>
+            </body>
         </html>
         <?php
        
     }
     
+    public static function show404() {
+        include(NOT_FOUND);
+    }
+    
     private function displayHead() {
-        ?> 
+        ?>
         <head>
             <title><?php echo $this->controller . ' - ' . $this->action ?></title>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <?php
                 if(is_string($this->css) and !empty($this->css)) {
             ?>
@@ -88,11 +122,12 @@ class Template {
     }
     
     private function getElement($name, $default) {
-        $elem = TEMPLATE_ROOT . $this->controller . DS. $name . TEMPLATE_EXTENSION;
+        $elem = TEMPLATE_ROOT . strtolower($this->controller) . DS. 
+                strtolower($name) . TEMPLATE_EXTENSION;
         if(is_readable($elem)) {
-            echo include $elem;
+            include $elem;
         } else {
-            echo include($default);
+            include($default);
         }
     } 
     

@@ -19,7 +19,7 @@ abstract class AbstractController {
     }
      
     protected function getController() {
-        $class = get_class();
+        $class = get_class($this);
         $pattern = '~^(\w+?)Controller$~';
         return preg_replace($pattern, "$1", $class);
     }
@@ -28,9 +28,11 @@ abstract class AbstractController {
         $this->redir = __session(REDIRECT, null, true);
     }
     
-    protected function display($action, array $data = array()) {
+    protected function display(
+            $action, array $data = array(), $css = DEFAULT_CSS, $js = array()
+            ) {
         $controller = $this->getController();
-        $view = new Template($controller, $action);
+        $view = new Template($controller, $action, $css, $js);
         $view->setAll($data);
         $view->display();
     }
@@ -43,7 +45,7 @@ abstract class AbstractController {
     }
     
     protected function redirectBack($action) {
-        if($this->redirect !== null) {
+        if($this->redir !== null) {
             $this->redirect($action, $this->redir);
         } else {
             throw new InvalidParametersException(

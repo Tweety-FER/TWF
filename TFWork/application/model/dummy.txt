@@ -1,0 +1,2 @@
+This is a dummy file ensuring the directory gets created.
+Put your Model implementations here, all named [Name]Model.
