@@ -12,7 +12,8 @@ class HomeController extends AbstractController {
     }
     
     public function action_index($params) {
-        $data = array('name' => 'Test');
+        $data = array();
+        $data['name'] = isset($params->name) ? $params->name : 'Test';
         $view = new Template($this->getController(), 'index');
         $view->setAll($data);
         $view->display();

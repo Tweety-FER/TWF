@@ -32,4 +32,10 @@ interface IRouter {
      */
     public function getParams();
     
+    /**
+     * 
+     * @return boolean Boolean showing success of the route-gathering
+     */
+    public function success();
+    
 }

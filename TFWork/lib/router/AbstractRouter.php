@@ -25,6 +25,12 @@ abstract class AbstractRouter implements IRouter {
      */
     protected $params;
     
+    /**
+     *
+     * @var boolean
+     */
+    protected $isSuccessful = false;
+    
     public function getAction() {
         return isset($this->action) ? $this->action : '';
     }
@@ -35,6 +41,10 @@ abstract class AbstractRouter implements IRouter {
 
     public function getParams() {
         return isset($this->params) ? (object) $this->params : new stdClass();
+    }
+    
+    public function success() {
+        return $this->isSuccessful;
     }
 
     abstract public function parse($url);

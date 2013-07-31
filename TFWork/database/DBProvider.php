@@ -1,6 +1,7 @@
 <?php
 
 include_once 'db.conf.php';
+require_once 'FluentPDO/FluentPDO.php';
 
 /**
  * Singleton database provider. Provides instances of FluentPDO for query building.

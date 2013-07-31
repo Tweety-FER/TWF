@@ -16,10 +16,6 @@ abstract class AbstractDBModel implements IDBModel {
 	}
 	
 	public function save() {
-		if($this->validate() === false) {
-			throw new InvalidParametersException('Properties of the model are not valid. Cannot store');
-		}
-		
 		//Check whether performing an update or an insert
 		if($this->getPrimaryKeyValue() === null) {
 			//Attempt insert
@@ -51,7 +47,7 @@ abstract class AbstractDBModel implements IDBModel {
 			$this->$k = $v;
 		}
 		
-		return $true;
+		return true;
 	}
 	
 	public function delete() {
@@ -89,7 +85,7 @@ abstract class AbstractDBModel implements IDBModel {
 		$columns = $this->getColumns();
 		
 		foreach($columns as $column) {
-			$values[$column] = isset($this->column) ? $this->column : null;
+			$values[$column] = isset($this->$column) ? $this->$column : null;
 		}
 		
 		return $values;
@@ -104,6 +100,4 @@ abstract class AbstractDBModel implements IDBModel {
 	abstract public function getPrimaryKey();
 	
 	abstract public function getPrimaryKeyValue();
-	
-	abstract public function getValidationRules();
 }

@@ -63,24 +63,29 @@ class Template {
         ?>
             <body>
         <?php
-        $this->getElement('header', DEF_HEADER);
-        
         $path = TEMPLATE_ROOT . strtolower($this->controller) . DS . 
                 strtolower($this->action) . TEMPLATE_EXTENSION;
         
-        if(is_readable($path)) {
-            
+        if(is_readable($path)) { 
+            $this->getElement('header', DEF_HEADER);
             include($path);
+            $this->getElement('footer', DEF_FOOTER);
         } else {
             include(NOT_FOUND);
         }
-        
-        $this->getElement('footer', DEF_FOOTER);
         ?>
             </body>
         </html>
         <?php
        
+    }
+    
+    protected function insert($template) {
+        if(is_readable($template)) {
+            include($template);
+        } else {
+            echo '<div class="not_found"><em>Not Found</em></div>';
+        }
     }
     
     public static function show404() {
@@ -90,29 +95,33 @@ class Template {
     private function displayHead() {
         ?>
         <head>
-            <title><?php echo $this->controller . ' - ' . $this->action ?></title>
+            <title>
+                <?php echo $this->controller . ' - ' . ucfirst($this->action) ?>
+            </title>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <?php
                 if(is_string($this->css) and !empty($this->css)) {
             ?>
-            <link type="text/css" rel="stylesheet" href="<?php echo $this->css?>" />
+            <link type="text/css" rel="stylesheet" href="<?php echo CSS_DIR 
+                . $this->css . '.css'?>" />
             <?php
                 } else if(is_array($this->css)) {
                     foreach($this->css as $src) {
                         ?> 
-            <link type="text/css" rel="stylesheet" href="<?php echo $src?>" />
+            <link type="text/css" rel="stylesheet" href="<?php echo CSS_DIR . 
+                    $src . '.css' ?>" />
                         <?php
                     } 
                 }
                 
                 if(is_string($this->js) and !empty($this->js)) {
                     ?>
-            <script src="<?php echo $this->js?>"></script>
+            <script src="<?php echo JS_DIR . $this->js .'.js'?>"></script>
                 <?php
                 } else if(is_array($this->js)) {
                     foreach($this->js as $src) {
                  ?> 
-            <script src="<?php echo $src?>"></script>
+            <script src="<?php echo JS_DIR . $src .'.js'?>"></script>
                  <?php   
                     }
                 }

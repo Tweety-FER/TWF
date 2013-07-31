@@ -11,7 +11,7 @@ class Dispatcher {
         
         $ctl = ucfirst(strtolower($router->getController())) . 'Controller';
         $act = 'action_' . strtolower($router->getAction());
-       
+        
         $break = function($className) {
             throw new ControllerNotFoundException(
                     "No such controller as $className"

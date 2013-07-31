@@ -1,9 +1,9 @@
 <?php
 
 define('DBTYPE', 'mysql');
-define('DBUSER', 'root');
-define('DBPASS', 'root');
-define('DBNAME', 'root');
+define('DBUSER', 'test');
+define('DBPASS', 'test');
+define('DBNAME', 'test');
 
 /**
  * Handles error reporting for any database caused exceptions.
@@ -15,16 +15,3 @@ define('DBNAME', 'root');
 function DBReportError(PDOException $exception) {
 	throw $exception;
 }
-
-/*
- * Registers a simple autoloader for local use.
- */
-spl_autoload_register(function($className) {
-	$file = 'FluentPDO' . DS . "$className.php";
-	if(is_readable($file)) {
-		require_once($file);
-		return true;
-	}
-	
-	return false;
-});
