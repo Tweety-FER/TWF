@@ -9,6 +9,8 @@ define('DEF_FOOTER', TEMPLATE_ROOT . 'footer' . TEMPLATE_EXTENSION);
 define('NOT_FOUND', TEMPLATE_ROOT . '404' . TEMPLATE_EXTENSION);
 define('CSS_DIR', '/css/');
 define('JS_DIR', '/js/');
+define('CONF_DIR', APP_ROOT . '/config/');
+define('CONF_FILE', CONF_DIR . 'rules.conf');
 define('IMG_DIR', '/img/');
 define('DEFAULT_CSS', 'default');
 define('REDIRECT', 'redirect');

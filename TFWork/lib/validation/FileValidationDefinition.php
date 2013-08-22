@@ -5,7 +5,7 @@
  * @author tweety
  *
  */
-class FileValidationDefinition implements IValidationDefinition {
+class FileValidationDefinition{
 
 	/**
 	 * Poredano polje identifikatora pravila
@@ -39,8 +39,8 @@ class FileValidationDefinition implements IValidationDefinition {
 	 * @param {string} $file Putanja konfiguracijskog dokumenta
 	 * @return boolean True pri uspjehu, false inace
 	*/
-	public function load_rules($file = 'resources/conf/rules.conf') {
-		$fp = fopen($file, 'r');
+	public function load_rules() {
+		$fp = fopen(CONF_FILE, 'r');
 		if($fp === false) {
 			return false;
 		}
